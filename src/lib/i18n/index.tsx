@@ -44,7 +44,7 @@ export function errorMessage(t: Dict, err: unknown): string {
   const raw = err instanceof Error ? err.message : typeof err === "object" && err && "message" in err ? String((err as { message: unknown }).message) : String(err ?? "");
   const errors = t.errors as Record<string, string>;
   for (const key of Object.keys(errors)) {
-    if (raw.includes(key)) return errors[key];
+    if (raw.includes(key)) return errors[key] ?? t.common.error;
   }
   return t.common.error;
 }

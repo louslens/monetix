@@ -70,6 +70,6 @@ export function useSignOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
-    router.navigate({ to: "/auth", replace: true });
+    router.navigate({ to: "/", replace: true });
   };
 }
