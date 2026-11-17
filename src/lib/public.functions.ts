@@ -21,7 +21,7 @@ function publicClient() {
 export const getPublicSettings = createServerFn({ method: "GET" }).handler(async () => {
   const { data } = await publicClient()
     .from("admin_settings")
-    .select("company_name, logo_url, contact_email, mobile_money_number, whatsapp_number, contact_phone, address, default_lang")
+    .select("id, company_name, logo_url, contact_email, whatsapp_number, address, default_lang")
     .eq("id", 1)
     .maybeSingle();
   return data;

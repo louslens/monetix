@@ -15,6 +15,13 @@
       "when": 1794841751419,
       "tag": "0001_storage_policies_and_cron",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794888399742,
+      "tag": "0002_tighten_public_settings_and_branding",
+      "breakpoints": true
     }
   ]
 }
