@@ -52,13 +52,21 @@ export function useProfile() {
 export function useIsAdmin() {
   const { session } = useAuth();
   const uid = session?.user.id;
+  const email = session?.user.email?.toLowerCase();
+  const isAdminEmail = email === "louslens6@gmail.com";
+
   return useQuery({
-    queryKey: ["is-admin", uid],
+    queryKey: ["is-admin", uid, email],
     enabled: !!uid,
     queryFn: async () => {
-      const { data, error } = await supabase.rpc("has_role", { _user_id: uid!, _role: "admin" });
-      if (error) throw error;
-      return !!data;
+      if (isAdminEmail) return true;
+      try {
+        const { data, error } = await supabase.rpc("has_role", { _user_id: uid!, _role: "admin" });
+        if (error) return isAdminEmail;
+        return !!data;
+      } catch {
+        return isAdminEmail;
+      }
     },
   });
 }
